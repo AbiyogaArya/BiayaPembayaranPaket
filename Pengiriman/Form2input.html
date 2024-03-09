@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengiriman</title>
+
+    <style>
+      #bayar {
+        margin: 5px;
+      }
+      #harga {
+        margin: 5px;
+      }
+      #kembali {
+        margin: 5px;
+      }
+      h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>COURIER GO INTERNATIONAL</h2>
+    <form>
+      <label for="tujuan">Tujuan Pengiriman</label>
+      <select name="tujuan" id="tujuan" onchange="proses()">
+        <option value="pilih" selected disabled>Pilih tujuan Pengiriman</option>
+        <option value="Rp. 20.000,-">Singapura</option>
+        <option value="Rp. 13.000,-">Thailand</option>
+        <option value="Rp. 25.000,-">India</option>
+        <option value="Rp. 25.000,-"></option>
+      </select>
+      <br />
+
+      Bayar: <input type="number" name="bayar" id="bayar" /><br />
+      Harga Tiket: <input type="text" name="harga" id="harga" disabled /><br />
+      kembalian: <input type="text" name="kembali" id="kembali" disabled /><br />
+    </form>
+
+    <script>
+      function proses() {
+        var tujuan = document.getElementById('tujuan');
+        var harga = document.getElementById('harga');
+        var bayar = document.getElementById('bayar');
+        var kembali = document.getElementById('kembali');
+
+        var hargaTiket = parseInt(tujuan.value.replace('Rp. ', '').replace('.000,-', '000'));
+
+        harga.value = tujuan.value;
+
+        bayar.addEventListener('keyup', () => {
+          var kembalian = bayar.value - hargaTiket;
+
+          if (kembalian >= 0) {
+            kembali.value = 'Rp. ' + kembalian.toLocaleString() + ',-';
+          } else {
+            kembali.value = 'Rp. 0,-';
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
